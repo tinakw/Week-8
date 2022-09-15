@@ -86,7 +86,7 @@ app.get('/veggies/:id', (req, res) => {
 
 // Index
 
-// Add a Veggie.find to find all of the veggies and pass that to your res.render
+// DONE a Veggie.find to find all of the veggies and pass that to your res.render
 
 app.get('/veggies', (req, res) => {
   Veggie.find({},(error, allVeggies)=>{
@@ -103,7 +103,7 @@ app.get('/veggies', (req, res) => {
 
 app.get('/veggies/new', (req, res) => {
   res.render('veggies/New');
-  // in here goes your res.redirect to the new FORM
+
 });
 
 // Create
@@ -116,9 +116,10 @@ app.post('/veggies', (req, res) => {
   } else {
     req.body.readyToEat = false;
   }
-  veggies.push(req.body);
-  console.log(veggies);
-  res.redirect('/veggies')
+  Veggie.create(req.body, (error, createdVeggie)=>{
+    res.redirect('/veggies')
+  });
+  
   });
   // In here goes your ready to eat change AND your Veggie.create method
 
